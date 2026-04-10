@@ -61,3 +61,31 @@ agents/<agent_name>/
 - Observabilidade
 
 ---
+
+## 🧾 Commit Convention
+
+Todos os commits DEVEM seguir o padrão Conventional Commits:
+
+<type>: <short description>
+
+Tipos permitidos:
+- feat
+- fix
+- refactor
+- chore
+- docs
+- test
+
+Regras:
+- mensagem em inglês
+- descrição clara e objetiva
+- usar bullet points no corpo quando necessário
+- evitar commits genéricos como "update" ou "fix bug"
+
+Exemplo:
+
+feat: add router agent for multi-agent orchestration
+
+- implement rule-based routing
+- integrate with existing agents
+- add basic intent classification
