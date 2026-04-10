@@ -1,19 +1,28 @@
-# 🚀 Roadmap — AI Workflow Orchestrator
+# 🚀 Roadmap — AI Multi-Agent Orchestrator
 
 ## 📌 Contexto
 
-Projeto focado em construção de um orquestrador de workflows com agentes utilizando LangGraph 
+Projeto focado na construção de um sistema de **orquestração de múltiplos agentes com IA**, utilizando LangGraph.
 
+O sistema evoluiu de um workflow orchestrator para um:
 
-# 🎯 Objetivo do MVP
+> 🧠 **AI Operating System pessoal**, capaz de rotear intenções para agentes especializados.
+
+**Disponibilidade:** ~5h/semana
+**Status atual:** MVP técnico funcional (engine + agentes + fallback)
+
+---
+
+# 🎯 Objetivo do MVP (Atualizado)
 
 Construir um sistema capaz de:
 
-* Receber um input (webhook ou manual)
-* Executar um fluxo definido
-* Utilizar IA em etapas do fluxo
-* Chamar APIs externas
-* Persistir estado básico
+* Receber input do usuário (CLI → futuramente UI)
+* Rotear a intenção para o agente correto
+* Executar agentes especializados
+* Utilizar IA com fallback entre modelos
+* Manter estado básico por agente
+* Permitir evolução para interface web
 
 ---
 
@@ -22,10 +31,31 @@ Construir um sistema capaz de:
 ## Componentes principais
 
 * Engine de execução (LangGraph)
-* Definição de estado
+* Sistema de agentes (modular)
+* Router (orquestrador de agentes)
 * Nodes (IA + HTTP + lógica)
-* Persistência
-* Interface simples (CLI ou JSON)
+* Camada de LLM com fallback
+* Persistência (em evolução)
+* Interface (CLI → Web futuramente)
+
+---
+
+# 🤖 Arquitetura (Nova)
+
+```text
+User Input
+   ↓
+Router Agent
+   ↓
+Seleciona:
+   - Investment Agent
+   - Career Agent
+   - General Agent (fallback)
+   ↓
+Execução via LangGraph
+   ↓
+Resposta
+```
 
 ---
 
@@ -41,7 +71,7 @@ Construir um sistema capaz de:
 * [x] Hello World com LangGraph
 * [x] Definir modelo de estado inicial
 
-**Entrega:** Projeto rodando com um grafo simples
+**Entrega:** Projeto rodando com grafo simples
 
 ---
 
@@ -50,25 +80,25 @@ Construir um sistema capaz de:
 **Objetivo: Engine básica de execução**
 
 * [x] Criar executor de workflow
-* [x] Implementar 2 nodes:
+* [x] Implementar nodes:
 
   * [x] Node de IA
   * [x] Node HTTP
-* [x] Criar fluxo fixo (hardcoded)
+* [x] Criar fluxo fixo
 
-**Entrega:** Fluxo funcional ponta a ponta
+**Entrega:** Execução ponta a ponta
 
 ---
 
 ## 🟡 Sprint 3 (Semana 5–6)
 
-**Objetivo: Estrutura dinâmica de workflows**
+**Objetivo: Estrutura dinâmica**
 
 * [ ] Definir formato JSON de workflow
 * [ ] Parser → LangGraph
-* [ ] Validação de estrutura
+* [ ] Validação
 
-**Entrega:** Criar workflows via JSON
+**Entrega:** Workflows dinâmicos
 
 ---
 
@@ -76,9 +106,9 @@ Construir um sistema capaz de:
 
 **Objetivo: Persistência e estado**
 
-* [ ] Persistir execução (DynamoDB ou SQLite)
-* [ ] Controle de step atual
-* [ ] Logs básicos
+* [ ] Persistência (SQLite ou DynamoDB)
+* [ ] Controle de execução
+* [ ] Logs estruturados
 
 **Entrega:** Execuções rastreáveis
 
@@ -86,69 +116,97 @@ Construir um sistema capaz de:
 
 ## 🔵 Sprint 5 (Semana 9–10)
 
-**Objetivo: Integração com IA (nível avançado)**
+**Objetivo: IA avançada + robustez**
 
-* [ ] Melhorar prompts dos nodes
+* [x] Integração com múltiplos modelos
+* [x] Fallback entre providers
+* [x] Tratamento de erro (rate limit, retry)
+* [ ] Melhorar prompts
 * [ ] Adicionar contexto/memória
-* [ ] Tratamento de erro/retry
 
-**Entrega:** Fluxos mais inteligentes e resilientes
+**Entrega:** Sistema resiliente com IA
 
 ---
 
 ## 🔴 Sprint 6 (Semana 11–12)
 
-**Objetivo: Agente gerador de workflows**
+**Objetivo: Multi-agent system (NOVO FOCO)**
 
-* [ ] Criar planner com LLM
-* [ ] Gerar workflow a partir de texto
-* [ ] Validação manual (supervisor)
+* [ ] Criar Router Agent
+* [ ] Implementar routing (inicialmente rule-based)
+* [ ] Criar agentes especializados:
 
-**Entrega:** Input → workflow automático
+  * [ ] Investment Agent
+  * [ ] Career Agent
+  * [ ] General Agent (fallback)
+* [ ] Definir contratos entre agentes
 
----
-
-# 🧠 Papel do Desenvolvedor
-
-* Definir arquitetura
-* Validar decisões da LLM
-* Revisar código gerado
-* Garantir simplicidade (evitar overengineering)
+**Entrega:** Sistema multi-agente funcional
 
 ---
 
-# ⚠️ Riscos
+## 🟣 Sprint 7 (Semana 13–14)
 
-* Complexidade excessiva (LangGraph)
-* Loops infinitos
-* Falta de controle de estado
+**Objetivo: Memória e contexto**
+
+* [ ] Persistência de dados do usuário:
+
+  * [ ] Portfolio de investimentos
+  * [ ] Perfil profissional (currículo)
+* [ ] Leitura desses dados nos agentes
+* [ ] Atualização controlada via IA
+
+**Entrega:** Agentes com memória real
 
 ---
 
-# ✅ Critérios de sucesso do MVP
+## 🟠 Sprint 8 (Semana 15–16)
 
-* Executa workflows reais
-* Integra com pelo menos 1 API externa
-* Usa IA de forma útil
-* Possui logs e rastreabilidade
+**Objetivo: Interface (Frontend MVP)**
+
+* [ ] Criar API (Express/Fastify)
+* [ ] Criar frontend simples (chat)
+* [ ] Conectar UI → Router → Agents
+* [ ] Exibir respostas
+
+**Entrega:** Sistema utilizável via UI
+
+---
+
+# 📍 Status Atual do Projeto
+
+✔️ Engine de execução funcionando
+✔️ Agents funcionando
+✔️ Integração com LLM funcionando
+✔️ Fallback entre modelos implementado
+✔️ Execução ponta a ponta validada
+
+---
+
+# ⚠️ Riscos (Atualizados)
+
+* Crescimento descontrolado do escopo
+* Complexidade do LangGraph
+* Routing incorreto entre agentes
+* Falta de consistência na memória
+* Dependência de modelos free (rate limits)
+
+---
+
+# ✅ Critérios de sucesso do MVP (Atualizado)
+
+* Roteamento correto entre agentes
+* Pelo menos 2 agentes funcionais
+* Uso real de contexto (portfolio/currículo)
+* Fallback de modelos funcionando
+* Interface mínima utilizável
 
 ---
 
 # 🚀 Próximos passos (pós-MVP)
 
-* UI visual (drag-and-drop)
-* Multi-tenant
-* Biblioteca de templates
-* Observabilidade avançada
-
----
-
-# 💡 Observação final
-
-Com 5h semanais, o foco deve ser:
-
-* Simplicidade
-* Iteração rápida
-* Evitar perfeccionismo
-
-O objetivo não é perfeição — é aprendizado + algo funcional.
+* Router com LLM (não só rule-based)
+* UI mais avançada (multi-agent view)
+* Observabilidade (logs, tracing)
+* Sistema de plugins de agentes
+* Deploy (AWS / container)
