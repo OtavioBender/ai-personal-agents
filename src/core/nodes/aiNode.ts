@@ -6,7 +6,7 @@ const FALLBACK_MODEL = 'openrouter/free';
 
 export const AINodeInputSchema = z.object({
   prompt: z.string(),
-  model: z.string().default(DEFAULT_MODEL),
+  model: z.string().optional(),
   temperature: z.number().default(0.7),
 });
 
