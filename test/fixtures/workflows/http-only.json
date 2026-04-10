@@ -1,0 +1,17 @@
+{
+  "name": "http-only-workflow",
+  "nodes": [
+    {
+      "id": "fetch",
+      "type": "http",
+      "config": {
+        "url": "https://httpbin.org/get",
+        "method": "GET"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "__start__", "to": "fetch" },
+    { "from": "fetch", "to": "__end__" }
+  ]
+}

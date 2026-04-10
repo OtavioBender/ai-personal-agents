@@ -1,0 +1,16 @@
+{
+  "name": "simple-workflow",
+  "nodes": [
+    {
+      "id": "greet",
+      "type": "ai",
+      "config": {
+        "prompt": "Return exactly: Hello, World!"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "__start__", "to": "greet" },
+    { "from": "greet", "to": "__end__" }
+  ]
+}

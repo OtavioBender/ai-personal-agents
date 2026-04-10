@@ -1,0 +1,21 @@
+{
+  "name": "invalid-workflow",
+  "nodes": [
+    {
+      "id": "node1",
+      "type": "ai",
+      "config": { "prompt": "test" }
+    },
+    {
+      "id": "node2",
+      "type": "ai",
+      "config": { "prompt": "test" }
+    }
+  ],
+  "edges": [
+    { "from": "__start__", "to": "node1" },
+    { "from": "node1", "to": "node2" },
+    { "from": "node2", "to": "node1" },
+    { "from": "node2", "to": "__end__" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ai-simple-workflow",
+  "nodes": [
+    {
+      "id": "echo",
+      "type": "ai",
+      "config": {
+        "prompt": "Return exactly: hi"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "__start__", "to": "echo" },
+    { "from": "echo", "to": "__end__" }
+  ]
+}

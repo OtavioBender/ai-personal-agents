@@ -1,10 +1,35 @@
 import { z } from 'zod';
 
+export const AINodeConfigSchema = z.object({
+  prompt: z.string().min(1, 'AI node requires a prompt'),
+});
+
+export const HTTPNodeConfigSchema = z.object({
+  url: z.string().url(),
+  method: z.enum(['GET', 'POST', 'PUT', 'DELETE']).default('GET'),
+  headers: z.record(z.string()).optional(),
+  body: z.any().optional(),
+});
+
+export const WorkflowNodeConfigSchema = z.union([
+  AINodeConfigSchema,
+  HTTPNodeConfigSchema,
+]);
+
 export const WorkflowNodeSchema = z.object({
   id: z.string().min(1),
   type: z.enum(['ai', 'http']),
   config: z.record(z.any()),
-});
+}).refine(
+  (data) => {
+    if (data.type === 'ai') return AINodeConfigSchema.safeParse(data.config).success;
+    if (data.type === 'http') return HTTPNodeConfigSchema.safeParse(data.config).success;
+    return false;
+  },
+  {
+    message: 'Invalid config for node type',
+  }
+);
 
 export const WorkflowEdgeSchema = z.object({
   from: z.string().min(1),

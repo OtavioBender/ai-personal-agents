@@ -1,0 +1,14 @@
+{
+  "name": "invalid-ai-no-prompt",
+  "nodes": [
+    {
+      "id": "ai-node",
+      "type": "ai",
+      "config": {}
+    }
+  ],
+  "edges": [
+    { "from": "__start__", "to": "ai-node" },
+    { "from": "ai-node", "to": "__end__" }
+  ]
+}

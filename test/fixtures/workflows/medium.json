@@ -1,0 +1,34 @@
+{
+  "name": "medium-workflow",
+  "nodes": [
+    {
+      "id": "analyze",
+      "type": "ai",
+      "config": {
+        "prompt": "Analyze this text and return a JSON with sentiment: { \"sentiment\": \"positive|negative|neutral\", \"summary\": \"short summary\" }"
+      }
+    },
+    {
+      "id": "classify",
+      "type": "ai",
+      "config": {
+        "prompt": "Based on sentiment from previous step, classify as: urgent or normal. Return JSON: { \"priority\": \"urgent|normal\" }"
+      }
+    },
+    {
+      "id": "notify",
+      "type": "http",
+      "config": {
+        "url": "https://httpbin.org/post",
+        "method": "POST",
+        "body": { "status": "processed" }
+      }
+    }
+  ],
+  "edges": [
+    { "from": "__start__", "to": "analyze" },
+    { "from": "analyze", "to": "classify" },
+    { "from": "classify", "to": "notify" },
+    { "from": "notify", "to": "__end__" }
+  ]
+}
